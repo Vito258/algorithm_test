@@ -8,6 +8,7 @@
 #include <string>
 #include <unordered_set>
 
+/* 无重复字符的最长字串 */
 class Solution {
 public:
     // 第一版，未测试通过（悲

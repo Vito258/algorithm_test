@@ -20,6 +20,7 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+/* 两数相加 */
 class Solution {
 public:
     /* 未通过 */
