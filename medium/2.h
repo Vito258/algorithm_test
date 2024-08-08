@@ -54,31 +54,62 @@ public:
 //    }
 
     // 通过了但是复杂度太高（悲
+//    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+//        // set pre node
+//        ListNode* pre = new ListNode(0);
+//        //
+//        ListNode* cur = pre;
+//        int carry = 0;
+//        while(l1 != nullptr || l2 != nullptr){
+//            int x = l1 == nullptr ? 0:l1 -> val;
+//            int y = l2 == nullptr ? 0:l2 -> val;
+//            int sum = x + y + carry;
+//
+//            carry = sum / 10;
+//            sum = sum % 10;
+//
+//            cur -> next = new ListNode(sum);
+//            cur = cur -> next;
+//
+//            if(l1 != nullptr)
+//                l1 = l1->next;
+//            if(l2 != nullptr)
+//                l2 = l2->next;
+//        }
+//        if(carry == 1)
+//            cur-> next = new ListNode(carry);
+//        return pre->next;
+//    }
+
+    // 官方题解
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        // set pre node
-        ListNode* pre = new ListNode(0);
-        //
-        ListNode* cur = pre;
+        ListNode *head = nullptr, *tail = nullptr;
         int carry = 0;
-        while(l1 != nullptr || l2 != nullptr){
-            int x = l1 == nullptr ? 0:l1 -> val;
-            int y = l2 == nullptr ? 0:l2 -> val;
-            int sum = x + y + carry;
-
+        while (l1 || l2) {
+            int n1 = l1 ? l1->val: 0;
+            int n2 = l2 ? l2->val: 0;
+            int sum = n1 + n2 + carry;
+            if (!head) {
+                //如果Head为空，即这是第一次循环
+                head = tail = new ListNode(sum % 10);
+            } else {
+                tail->next = new ListNode(sum % 10);
+                tail = tail->next;
+            }
             carry = sum / 10;
-            sum = sum % 10;
 
-            cur -> next = new ListNode(sum);
-            cur = cur -> next;
-
-            if(l1 != nullptr)
+            //更新传进来的 ListNode值，以用于下一位的计算
+            if (l1) {
                 l1 = l1->next;
-            if(l2 != nullptr)
+            }
+            if (l2) {
                 l2 = l2->next;
+            }
         }
-        if(carry == 1)
-            cur-> next = new ListNode(carry);
-        return pre->next;
+        if (carry > 0) {
+            tail->next = new ListNode(carry);
+        }
+        return head;
     }
 };
 

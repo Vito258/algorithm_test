@@ -22,6 +22,7 @@ set(EASY_SOURCES
 # 一般难度的题目
 set(MEDIUM_SOURCES
         medium/2.h
+        medium/3.h
 )
 
 # 困难难度的题目
