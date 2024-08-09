@@ -23,6 +23,7 @@ set(EASY_SOURCES
 set(MEDIUM_SOURCES
         medium/2.h
         medium/3.h
+        medium/5.h
 )
 
 # 困难难度的题目
