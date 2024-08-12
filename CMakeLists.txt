@@ -24,6 +24,9 @@ set(MEDIUM_SOURCES
         medium/2.h
         medium/3.h
         medium/5.h
+        medium/6.h
+        medium/7.h
+        medium/8.h
 )
 
 # 困难难度的题目
