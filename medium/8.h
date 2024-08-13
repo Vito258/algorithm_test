@@ -10,7 +10,7 @@
 /* 字符串转换整数 */
 class Solution {
 public:
-    // 第一版，理解有误"0-1"时应返回 0，"words and 987"应返回 0
+    // 第一版，理解有误,"0-1"时应返回 0，"words and 987"应返回 0
 //    int myAtoi(std::string s) {
 //        // 去除前导和末尾的空格
 //        auto start = s.find_first_not_of(" \t\n\r\f\v"); // 查找第一个非空白字符的位置
@@ -49,6 +49,51 @@ public:
 //        result = result < INT_MIN ? INT_MIN : result;
 //        return static_cast<int>(result);
 //    }
+
+    int myAtoi(std::string s) {
+        // 去除前导和末尾的空格
+        size_t start = s.find_first_not_of(" \t\n\r\f\v");
+        if (start == std::string::npos)
+            return 0;
+        size_t end = s.find_last_not_of(" \t\n\r\f\v");
+        std::string trimmed = s.substr(start, (end - start + 1));
+
+        // 处理符号
+        bool is_negative = false;
+        if (trimmed[0] == '-') {
+            is_negative = true;
+            trimmed.erase(0, 1); // 移除负号
+        } else if (trimmed[0] == '+') {
+            trimmed.erase(0, 1); // 移除正号
+        }
+
+        // 转换，通过跳过前置0来读取该整数，直到遇到非数字字符或者字符串的结尾
+        long result = 0;
+        for (size_t i = 0; i < trimmed.size(); i++) {
+            if (isdigit(trimmed[i])) {
+                // 检查是否溢出
+                if (result > INT_MAX / 10 || (result == INT_MAX / 10 && trimmed[i] - '0' > 7)) {
+                    return is_negative ? INT_MIN : INT_MAX;
+                }
+                result = result * 10 + trimmed[i] - '0';
+            } else {
+                break; // 遇到非数字字符则停止
+            }
+        }
+
+        if (is_negative) {
+            result = -result;
+        }
+
+        // 最终检查溢出
+        if (result >= INT_MAX) {
+            return INT_MAX;
+        } else if (result <= INT_MIN) {
+            return INT_MIN;
+        }
+
+        return static_cast<int>(result);
+    }
 };
 
 #endif //ALGORITHM_TEST_8_H
