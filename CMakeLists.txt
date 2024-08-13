@@ -16,6 +16,7 @@ include_directories(
 # 简单难度的题目
 set(EASY_SOURCES
         easy/1.h
+        medium/9.h
 
 )
 
