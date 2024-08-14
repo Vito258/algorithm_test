@@ -33,6 +33,7 @@ set(MEDIUM_SOURCES
 # 困难难度的题目
 set(HARD_SOURCES
         hard/4.h
+        hard/10.h
 )
 
 add_executable(algorithm_test
