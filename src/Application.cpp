@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "12.h"
+#include "13.h"
 
 int main() {
     //10的测试用例
@@ -17,9 +17,10 @@ int main() {
 //    std::cout<< solution.isMatch(s6,s7);
 
     Solution solution;
-    int num1 = 3749;
-    int num2 = 58;
-    int num3 = 1994;
-    int num4 = 10;
-    std::cout<<solution.intToRoman(num1);
+    std::string s1 = "III";
+    std::string s2 = "IV";
+    std::string s3 = "IX";
+    std::string s4 = "LVIII";
+    std::string s5 = "MCMXCIV";
+    std::cout<<solution.romanToInt(s1);
 }
