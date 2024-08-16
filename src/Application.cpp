@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "13.h"
+#include "14.h"
 
 int main() {
     //10的测试用例
@@ -17,10 +17,8 @@ int main() {
 //    std::cout<< solution.isMatch(s6,s7);
 
     Solution solution;
-    std::string s1 = "III";
-    std::string s2 = "IV";
-    std::string s3 = "IX";
-    std::string s4 = "LVIII";
-    std::string s5 = "MCMXCIV";
-    std::cout<<solution.romanToInt(s1);
+    std::vector<std::string> v1 = {"flower","flow","flight"};
+    std::vector<std::string> v2 = {"dog","racecar","car"};
+    std::vector<std::string> v3 = {"ab", "a"};
+    std::cout<<solution.longestCommonPrefix(v3);
 }
