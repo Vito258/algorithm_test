@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "14.h"
+#include "15.h"
 
 int main() {
     //10的测试用例
@@ -17,8 +17,14 @@ int main() {
 //    std::cout<< solution.isMatch(s6,s7);
 
     Solution solution;
-    std::vector<std::string> v1 = {"flower","flow","flight"};
-    std::vector<std::string> v2 = {"dog","racecar","car"};
-    std::vector<std::string> v3 = {"ab", "a"};
-    std::cout<<solution.longestCommonPrefix(v3);
+    std::vector<int> nums1 = {-1,0,1,2,-1,-4};
+    std::vector<int> nums2 = {0,1,1};
+    std::vector<int> nums3 = {0,0,0};
+
+    const auto result = solution.threeSum(nums1);
+    for(std::vector<int> v : result){
+        for(int i : v)
+            std::cout<<i<<",";
+        std::cout<<"\n";
+    }
 }
