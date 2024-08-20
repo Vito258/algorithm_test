@@ -32,6 +32,8 @@ set(MEDIUM_SOURCES
         medium/11.h
         medium/12.h
         medium/15.h
+        medium/16.h
+        medium/17.h
 )
 
 # 困难难度的题目
