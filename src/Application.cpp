@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "18.h"
+#include "19.h"
 
 int main() {
     //10的测试用例
@@ -16,15 +16,18 @@ int main() {
 //    Solution solution;
 //    std::cout<< solution.isMatch(s6,s7);
 
-
-    std::vector<int> v1 = {1,0,-1,0,-2,2};
-    std::vector<int> v2 = {2,2,2,2,2};
-    std::vector<int> v3 = {1000000000,1000000000,1000000000,1000000000};
     Solution solution;
-    for (auto temp : solution.fourSum(v3,0)){
-       for(auto temp2 : temp){
-           std::cout<<temp2<<",";
-       }
-       std::cout<<"\n";
-    }
+    ListNode l1 = 1;
+
+    ListNode l2 = 2;
+    l1.next = &l2;
+    ListNode l3 = 3;
+    l2.next = &l3;
+    ListNode l4 = 4;
+    l3.next = &l4;
+    ListNode l5 = 5;
+    l4.next = &l5;
+
+    // 链表l1
+    solution.removeNthFromEnd(&l1,2);
 }
