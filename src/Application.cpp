@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "17.h"
+#include "18.h"
 
 int main() {
     //10的测试用例
@@ -16,10 +16,15 @@ int main() {
 //    Solution solution;
 //    std::cout<< solution.isMatch(s6,s7);
 
+
+    std::vector<int> v1 = {1,0,-1,0,-2,2};
+    std::vector<int> v2 = {2,2,2,2,2};
+    std::vector<int> v3 = {1000000000,1000000000,1000000000,1000000000};
     Solution solution;
-    std::string s1 = "23";
-    std::vector<std::string> result = solution.letterCombinations(s1);
-    for(std::string s : result){
-        std::cout<< s<< std::endl;
+    for (auto temp : solution.fourSum(v3,0)){
+       for(auto temp2 : temp){
+           std::cout<<temp2<<",";
+       }
+       std::cout<<"\n";
     }
- }
+}
