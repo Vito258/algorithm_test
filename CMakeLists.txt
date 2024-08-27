@@ -19,6 +19,7 @@ set(EASY_SOURCES
         easy/9.h
         easy/13.h
         easy/14.h
+        easy/20.h
 )
 
 # 一般难度的题目
