@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "19.h"
+#include "20.h"
 
 int main() {
     //10的测试用例
@@ -16,22 +16,11 @@ int main() {
 //    Solution solution;
 //    std::cout<< solution.isMatch(s6,s7);
 
-    Solution solution;
-    ListNode l1 = 1;
-
-    ListNode l2 = 2;
-    l1.next = &l2;
-    ListNode l3 = 3;
-    l2.next = &l3;
-    ListNode l4 = 4;
-    l3.next = &l4;
-    ListNode l5 = 5;
-    l4.next = &l5;
-
-    // 执行方法并遍历链表l1
-    ListNode* result = solution.removeNthFromEnd(&l1,2);
-    do{
-        std::cout<<result->val<<std::endl;
-        result = result -> next;
-    }while(result->next != nullptr);
+     Solution solution;
+     std::string s1 = "([)]";    // 预期为false
+     std::string s2 = "()";      // 预期为true
+     std::string s3 = "(){}}{";  // 预期为false
+     std::string s4 = "({[)";    // 预期为false
+     std::string s5 = "([)]";    // 预期为false
+     std::cout<< solution.isValid(s5);
 }
