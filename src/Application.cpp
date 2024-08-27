@@ -28,6 +28,10 @@ int main() {
     ListNode l5 = 5;
     l4.next = &l5;
 
-    // 链表l1
-    solution.removeNthFromEnd(&l1,2);
+    // 执行方法并遍历链表l1
+    ListNode* result = solution.removeNthFromEnd(&l1,2);
+    do{
+        std::cout<<result->val<<std::endl;
+        result = result -> next;
+    }while(result->next != nullptr);
 }

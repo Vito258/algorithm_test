@@ -20,11 +20,12 @@ struct ListNode {
 /* 删除链表的倒数第 N 个结点 */
 class Solution {
 public:
+    // 第一版，尝试自己写，为什么自己的测试没问题，力扣的测试用例过不去
     ListNode *removeNthFromEnd(ListNode *head, int n) {
         // 判断链表有几个值
         int size = 1;
 
-        const ListNode *head_copy = head;
+        ListNode *head_copy = head;
         while (head_copy->next != nullptr){
             size++;
             head_copy = head_copy->next;
