@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "20.h"
+#include "22.h"
 
 int main() {
     //10的测试用例
@@ -17,10 +17,8 @@ int main() {
 //    std::cout<< solution.isMatch(s6,s7);
 
      Solution solution;
-     std::string s1 = "([)]";    // 预期为false
-     std::string s2 = "()";      // 预期为true
-     std::string s3 = "(){}}{";  // 预期为false
-     std::string s4 = "({[)";    // 预期为false
-     std::string s5 = "([)]";    // 预期为false
-     std::cout<< solution.isValid(s5);
+     std::vector<std::string> result = solution.generateParenthesis(3);
+     for(auto a : result){
+         std::cout<<a<<std::endl;
+     }
 }
