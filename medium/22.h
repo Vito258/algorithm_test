@@ -72,23 +72,42 @@ public:
 //    }
 
 
-    // 剪枝，本质还是回溯
+    // 剪枝，本质还是回溯,个人觉得最简洁最好理解的一版
+//    std::vector<std::string> generateParenthesis(int n) {
+//        dfs("", n, n);
+//        return res;
+//    }
+//private:
+//    std::vector<std::string> res;
+//    void dfs(const std::string& str, int left, int right) {
+//        // 这里的判断的意义在于看是不是左括号太多或者右括号太多，不是有意义的状态，直接返回
+//        if (left < 0 || left > right)  // 出现类似 ()) )) 这种格式都是错误的不用再继续了
+//            return;
+//        if (left == 0 && right == 0) {
+//            res.push_back(str);
+//            return;
+//        }
+//        //
+//        dfs(str + '(', left - 1, right);
+//        dfs(str + ')', left, right - 1);
+//    }
+
     std::vector<std::string> generateParenthesis(int n) {
-        dfs("", n, n);
+       dfs("",n,n);
         return res;
+    }
+    void dfs(std::string str,int left, int right){
+      if(left < 0 || left > right){
+          return;
+      }else if (left == 0 && right == 0){
+          res.push_back(str);
+          return;
+      }
+        dfs(str+"(",left - 1,right);
+        dfs(str+")",left,right - 1);
     }
 private:
     std::vector<std::string> res;
-    void dfs(const std::string& str, int left, int right) {
-        if (left < 0 || left > right)  // 出现类似 ()) )) 这种格式都是错误的不用再继续了
-            return;
-        if (left == 0 && right == 0) {
-            res.push_back(str);
-            return;
-        }
-        dfs(str + '(', left - 1, right);
-        dfs(str + ')', left, right - 1);
-    }
 };
 
 #endif //ALGORITHM_TEST_22_H
