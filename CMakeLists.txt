@@ -45,6 +45,8 @@ set(MEDIUM_SOURCES
 set(HARD_SOURCES
         hard/4.h
         hard/10.h
+        hard/23.h
+        utils/utils.h
 )
 
 add_executable(algorithm_test
