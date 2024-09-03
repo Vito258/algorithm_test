@@ -13,7 +13,7 @@ struct ListNode {
 
     ListNode(int x) : val(x), next(nullptr) {}
 
-    ListNode(int x, ListNode next) : val(x), *next(next) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 #endif //ALGORITHM_TEST_UTILS_H

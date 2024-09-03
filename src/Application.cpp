@@ -1,7 +1,8 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "22.h"
+#include "23.h"
+#include "../utils/utils.h"
 
 int main() {
     //10的测试用例
@@ -16,9 +17,26 @@ int main() {
 //    Solution solution;
 //    std::cout<< solution.isMatch(s6,s7);
 
-     Solution solution;
-     std::vector<std::string> result = solution.generateParenthesis(3);
-     for(auto a : result){
-         std::cout<<a<<std::endl;
-     }
+    Solution solution;
+    ListNode *l1 = new ListNode(1, nullptr);
+    l1->next = new ListNode(4, nullptr);
+    l1->next = new ListNode(5, nullptr);
+
+    ListNode *l2 = new ListNode(1, nullptr);
+    l2->next = new ListNode(3, nullptr);
+    l2->next = new ListNode(4, nullptr);
+
+    ListNode *l3 = new ListNode(2, nullptr);
+    l3->next = new ListNode(6, nullptr);
+
+    std::vector<ListNode *> list1;
+    list1.push_back(l1);
+    list1.push_back(l2);
+    list1.push_back(l3);
+
+    auto result =  solution.mergeKLists(list1);
+    while(result != nullptr){
+        std::cout<<result ->val<< std::endl;
+        result = result->next;
+    }
 }

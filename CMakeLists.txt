@@ -53,4 +53,5 @@ add_executable(algorithm_test
         ${EASY_SOURCES}
         ${MEDIUM_SOURCES}
         ${HARD_SOURCES}
-        src/Application.cpp)
+        src/Application.cpp
+        test/test.h)
