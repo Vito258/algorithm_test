@@ -75,25 +75,37 @@ public:
     //结果
     //最终链表结构为 (0, 2, 1, 4, 3)。
     //返回 dummy->next，即 (2)。
-    ListNode *swapPairs(ListNode *head) {
-        ListNode *dummy = new ListNode(0, head);
-        ListNode *prev = dummy;
-        ListNode *curr = head;
+//    ListNode *swapPairs(ListNode *head) {
+//        ListNode *dummy = new ListNode(0, head);
+//        ListNode *prev = dummy;
+//        ListNode *curr = head;
+//
+//        while (curr != nullptr && curr->next != nullptr) {
+//            // 保存下一个节点
+//            ListNode *nextPair = curr->next->next;
+//            // 交换节点
+//            ListNode *next = curr->next;
+//            next->next = curr;
+//            curr->next = nextPair;
+//            // 更新 prev 和 curr
+//            prev->next = next;
+//            prev = curr;
+//            curr = nextPair;
+//        }
+//
+//        return dummy->next;
+//    }
 
-        while (curr != nullptr && curr->next != nullptr) {
-            // 保存下一个节点
-            ListNode *nextPair = curr->next->next;
-            // 交换节点
-            ListNode *next = curr->next;
-            next->next = curr;
-            curr->next = nextPair;
-            // 更新 prev 和 curr
-            prev->next = next;
-            prev = curr;
-            curr = nextPair;
+    // 以上方法类似于官方题解2 中的迭代
+    // 下面是官方题解1 使用递归
+    ListNode* swapPairs(ListNode* head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
         }
-
-        return dummy->next;
+        ListNode* newHead = head->next;
+        head->next = swapPairs(newHead->next);
+        newHead->next = head;
+        return newHead;
     }
 };
 
