@@ -112,25 +112,37 @@ class Test {
 //        return dummy ->next;
 //    }
 
-     // 24.两两交换链表中的结点
-     ListNode *swapPairs(ListNode *head) {
-        ListNode *dummy = new ListNode(0, head);
-        ListNode *prev = dummy;
-        ListNode *curr = dummy -> next;
+    // 24.两两交换链表中的结点
+//     ListNode *swapPairs(ListNode *head) {
+//        ListNode *dummy = new ListNode(0, head);
+//        ListNode *prev = dummy;
+//        ListNode *curr = dummy -> next;
+//
+//        while(curr && curr ->next){
+//            ListNode *next = curr ->next;
+//            next -> next = curr;
+//            ListNode *nextPair = curr ->next ->next;
+//            curr ->next = nextPair;
+//
+//            prev ->next = next;
+//            prev = curr;
+//            curr = nextPair;
+//        }
+//         return dummy ->next;
+//     }
 
-        while(curr && curr ->next){
-            ListNode *next = curr ->next;
-            next -> next = curr;
-            ListNode *nextPair = curr ->next ->next;
-            curr ->next = nextPair;
-
-            prev ->next = next;
-            prev = curr;
-            curr = nextPair;
+    // 使用递归的写法
+    ListNode *swapPairs(ListNode *head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
         }
-         return dummy ->next;
-     }
+        ListNode *headNext = head->next;
 
+        ListNode *pair = swapPairs(headNext->next);
+        headNext->next = head;
+        head -> next = pair;
+        return headNext;
+    }
 };
 
 #endif //ALGORITHM_TEST_TEST_H
