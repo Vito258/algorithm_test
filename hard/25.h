@@ -12,8 +12,25 @@
 // 0 <= Node.val <= 1000
 class Solution {
 public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
+    // 尝试自己写：
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if (k < 2)
+            return head;
 
+        // 按照k值截取并反转链表
+        ListNode *dummy = new ListNode(0, head);
+        ListNode *tail = dummy -> next;
+
+        ListNode *newHead = new ListNode(0, nullptr);
+
+        for (int i = 0; i < k - 1; i++){
+            tail  = tail ->next;
+        }
+
+        newHead = tail;
+        newHead -> next  = reverseKGroup(head,k-1);
+        return newHead;
     }
 };
+
 #endif //ALGORITHM_TEST_25_H

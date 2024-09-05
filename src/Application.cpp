@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "24.h"
+#include "25.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -22,10 +22,7 @@ int main() {
     l1->next = new ListNode(2, nullptr);
     l1->next ->next = new ListNode(3, nullptr);
     l1->next -> next -> next = new ListNode(4, nullptr);
+    l1->next -> next -> next  -> next = new ListNode(5, nullptr);
 
-    auto result =  solution.swapPairs(l1);
-    while(result != nullptr){
-        std::cout<<result ->val<< std::endl;
-        result = result->next;
-    }
+    solution.reverseKGroup(l1,2);
 }
