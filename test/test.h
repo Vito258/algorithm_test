@@ -5,7 +5,8 @@
 #ifndef ALGORITHM_TEST_TEST_H
 #define ALGORITHM_TEST_TEST_H
 
-#include "../hard/23.h"
+//#include "../hard/23.h"
+#include "../hard/25.h"
 
 class Test {
     // 23. 分而治之
@@ -132,16 +133,59 @@ class Test {
 //     }
 
     // 使用递归的写法
-    ListNode *swapPairs(ListNode *head) {
-        if (head == nullptr || head->next == nullptr) {
+//    ListNode *swapPairs(ListNode *head) {
+//        if (head == nullptr || head->next == nullptr) {
+//            return head;
+//        }
+//        ListNode *headNext = head->next;
+//
+//        ListNode *pair = swapPairs(headNext->next);
+//        headNext->next = head;
+//        head -> next = pair;
+//        return headNext;
+//    }
+
+    // 25、反转k个链表
+    std::pair<ListNode*, ListNode*> myReverse(ListNode* head, ListNode* endNode) {
+        ListNode *prev = endNode->next;
+        ListNode *current = head;
+        while (prev != endNode) {
+            ListNode *next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        return {endNode, head};
+    }
+
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if (head == nullptr || k <= 1) {
             return head;
         }
-        ListNode *headNext = head->next;
 
-        ListNode *pair = swapPairs(headNext->next);
-        headNext->next = head;
-        head -> next = pair;
-        return headNext;
+        ListNode *dummy = new ListNode(0, head);
+        ListNode *prevNode = dummy;
+        ListNode *endNode = dummy;
+
+        while (head) {
+            for (int i = 0; i < k; ++i) {
+                endNode = endNode->next;
+                if (endNode == nullptr) {
+                    return dummy->next;
+                }
+            }
+
+            // 保存下一组的第一个节点
+            ListNode *nextGroup = endNode->next;
+            std::tie(head, endNode) = myReverse(head, endNode);
+            prevNode->next = head;
+            endNode->next = nextGroup;
+            prevNode = endNode;
+            head = nextGroup;
+        }
+
+        delete dummy;  // 释放 dummy 节点的内存
+        return dummy->next;
     }
 };
 

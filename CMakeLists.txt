@@ -21,6 +21,7 @@ set(EASY_SOURCES
         easy/14.h
         easy/20.h
         easy/21.h
+        hard/26.h
 )
 
 # 一般难度的题目
