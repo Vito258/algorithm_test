@@ -21,7 +21,7 @@ set(EASY_SOURCES
         easy/14.h
         easy/20.h
         easy/21.h
-        hard/26.h
+        easy/26.h
 )
 
 # 一般难度的题目
@@ -48,7 +48,7 @@ set(HARD_SOURCES
         hard/4.h
         hard/10.h
         hard/23.h
-        utils/utils.h
+
         hard/25.h
 )
 
@@ -57,4 +57,5 @@ add_executable(algorithm_test
         ${MEDIUM_SOURCES}
         ${HARD_SOURCES}
         src/Application.cpp
-        test/test.h)
+        test/test.h
+        utils/utils.h)

@@ -7,6 +7,7 @@
 
 //#include "../hard/23.h"
 #include "../hard/25.h"
+#include "../easy/26.h"
 
 class Test {
     // 23. 分而治之
@@ -146,7 +147,7 @@ class Test {
 //    }
 
     // 25、反转k个链表
-    std::pair<ListNode*, ListNode*> myReverse(ListNode* head, ListNode* endNode) {
+    std::pair<ListNode *, ListNode *> myReverse(ListNode *head, ListNode *endNode) {
         ListNode *prev = endNode->next;
         ListNode *current = head;
         while (prev != endNode) {
@@ -158,7 +159,7 @@ class Test {
         return {endNode, head};
     }
 
-    ListNode* reverseKGroup(ListNode* head, int k) {
+    ListNode *reverseKGroup(ListNode *head, int k) {
         if (head == nullptr || k <= 1) {
             return head;
         }
@@ -186,6 +187,24 @@ class Test {
 
         delete dummy;  // 释放 dummy 节点的内存
         return dummy->next;
+    }
+
+    // 26.删除数组中的重复元素，使用双指针的方法
+    // 大体思路就是一个指针向前读值，另一个指针用于在后面作比较
+    int removeDuplicates(std::vector<int> &nums) {
+        size_t size = nums.size();
+        if(size == 0)
+            return 0;
+        int fast = 1;
+        int slow = 1;
+        while(fast < size){
+            if(nums[fast] != nums[fast -1]){
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+        return slow;
     }
 };
 

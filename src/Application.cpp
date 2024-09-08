@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "25.h"
+#include "26.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -18,11 +18,7 @@ int main() {
 //    std::cout<< solution.isMatch(s6,s7);
 
     Solution solution;
-    ListNode *l1 = new ListNode(1, nullptr);
-    l1->next = new ListNode(2, nullptr);
-    l1->next ->next = new ListNode(3, nullptr);
-    l1->next -> next -> next = new ListNode(4, nullptr);
-    l1->next -> next -> next  -> next = new ListNode(5, nullptr);
-
-    solution.reverseKGroup(l1,2);
+    std::vector<int> v1 = {0,0,1,1,1,2,2,3,3,4};
+    int result =  solution.removeDuplicates(v1);
+    std::cout<<"nums count:"<<result<<std::endl;
 }
