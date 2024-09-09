@@ -14,29 +14,42 @@
 // 0 <= val <= 100
 class Solution {
 public:
-    // 自己尝试去写，使用双指针的方法
-    int removeElement(std::vector<int> &nums, int val) {
-        size_t size = nums.size();
-        if (size == 0) {
-            return size;
-        }
-        int fast = 0, slow = 0;
-        while (fast < size) {
-            if(nums[fast] == val){
+    // 自己尝试去写，使用双指针的方法 -通过！！
+//    int removeElement(std::vector<int> &nums, int val) {
+//        size_t size = nums.size();
+//        if (size == 0) {
+//            return size;
+//        }
+//        int fast = 0, slow = 0;
+//        while (fast < size) {
+//            if (nums[fast] != val && nums[slow] == val) {
+//                nums[slow] = nums[fast];
+//                nums[fast] = val;
+//                slow++;
+//            } else if (nums[fast] == val && nums[slow] != val) {
+//                slow++;
+//            } else if (nums[fast] != val && nums[slow] != val){
+//                slow++;
+//            }
+//            fast++;
+//
+//        }
+//        return slow;
+//    }
 
-            }else if(nums[fast - 1] == val){
-                // 交换数值
-                int temp = nums[slow];
-                nums[slow] = nums[fast];
-                nums[fast] = temp;
+    // 上面的那种方法至多会遍历数组两次，可以继续优化
+    // 官方题解2 双指针优化
+    int removeElement(std::vector<int>& nums, int val) {
+        int left = 0, right = nums.size();
+        while (left < right) {
+            if (nums[left] == val) {
+                nums[left] = nums[right - 1];
+                right--;
+            } else {
+                left++;
             }
-            fast++;
         }
-
-        for(int i: nums){
-            std::cout<<i<<std::endl;
-        }
-        return slow;
+        return left;
     }
 };
 

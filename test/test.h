@@ -206,6 +206,21 @@ class Test {
         }
         return slow;
     }
+
+    // 27、删除数组中指定的元素 双指针优化法
+    int removeElement(std::vector<int>& nums, int val) {
+       int left = 0;
+       int right = nums.size();
+        while (left < right){
+            if(nums[left] == val){
+                nums[left] = nums[right - 1];
+                right--;
+            }else{
+                left++;
+            }
+        }
+        return left;
+    }
 };
 
 #endif //ALGORITHM_TEST_TEST_H

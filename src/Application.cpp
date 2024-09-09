@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "27.h"
+#include "28.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -18,8 +18,16 @@ int main() {
 //    std::cout<< solution.isMatch(s6,s7);
 
     Solution solution;
-    std::vector<int> v1 = {0,0,1,1,1,2,2,3,3,4};
-    std::vector<int> v2 = {3,2,2,3};
-    int result = solution.removeElement(v2,3);
-    std::cout<<"nums.length :" << result <<std::endl;
+    std::string s1 = "sadbutsad";
+    std::string s2 = "sad";
+
+    std::string s3 = "leetcode";
+    std::string s4 = "leeto";
+
+    std::string s5 = "mississippi";
+    std::string s6 = "issip";      // 预期结果 4
+
+    std::string s7 = "mississippi";
+    std::string s8 = "issi";      // 预期结果 1
+    std::cout<<solution.strStr(s7,s8);
 }
