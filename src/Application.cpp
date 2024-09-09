@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "26.h"
+#include "27.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -19,6 +19,7 @@ int main() {
 
     Solution solution;
     std::vector<int> v1 = {0,0,1,1,1,2,2,3,3,4};
-    int result =  solution.removeDuplicates(v1);
-    std::cout<<"nums count:"<<result<<std::endl;
+    std::vector<int> v2 = {3,2,2,3};
+    int result = solution.removeElement(v2,3);
+    std::cout<<"nums.length :" << result <<std::endl;
 }
