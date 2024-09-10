@@ -29,5 +29,5 @@ int main() {
 
     std::string s7 = "mississippi";
     std::string s8 = "issi";      // 预期结果 1
-    std::cout<<solution.strStr(s7,s8);
+    std::cout<<solution.strStr(s5,s6);
 }

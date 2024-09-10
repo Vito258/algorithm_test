@@ -221,6 +221,23 @@ class Test {
         }
         return left;
     }
+
+    // 28、匹配字符串
+    int strStr(std::string s, std::string p) {
+        int s_size = s.size();
+        int p_size = p.size();
+        for(int i = 0; i<= s_size - p_size; i++){
+            int j = i;
+            int k = 0;
+
+            while(k < p_size && s[j] == p[k]){
+                j++;
+                k++;
+            }
+            if(k == p_size) return i;
+        }
+        return -1;
+    }
 };
 
 #endif //ALGORITHM_TEST_TEST_H
