@@ -223,18 +223,55 @@ class Test {
     }
 
     // 28、匹配字符串
-    int strStr(std::string s, std::string p) {
-        int s_size = s.size();
-        int p_size = p.size();
-        for(int i = 0; i<= s_size - p_size; i++){
-            int j = i;
-            int k = 0;
+//    int strStr(std::string s, std::string p) {
+//        int s_size = s.size();
+//        int p_size = p.size();
+//        for(int i = 0; i<= s_size - p_size; i++){
+//            int j = i;
+//            int k = 0;
+//
+//            while(k < p_size && s[j] == p[k]){
+//                j++;
+//                k++;
+//            }
+//            if(k == p_size) return i;
+//        }
+//        return -1;
+//    }
+    // 28、使用Kmp算法匹配
+    int strStr(std::string s , std::string p){
+        size_t s_size = s.size();
+        size_t p_size = p.size();
 
-            while(k < p_size && s[j] == p[k]){
-                j++;
-                k++;
+        if(p_size > s_size){
+            return -1;
+        }
+        if(s_size == 0){
+            return -1;
+        }
+        std::vector<int> next (p_size,0);
+
+        int j = 0;
+        for(int i=1;i<p_size;i++){
+            while (j>0 && p[i] != p[j]){
+                j = next[j - 1];
             }
-            if(k == p_size) return i;
+            if(p[i] == p[j]){
+                j++;
+            }
+            next[i] = j;
+        }
+        j = 0;
+        for(int i=0; i<s_size; i++){
+            while(j>0 && s[i] != p[j]){
+                j = next[j - 1];
+            }
+            if(s[i] == p[j]){
+                j++;
+            }
+            if(j == p_size){
+                return i - p_size + 1;
+            }
         }
         return -1;
     }
