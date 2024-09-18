@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "28.h"
+#include "29.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -17,17 +17,13 @@ int main() {
 //    Solution solution;
 //    std::cout<< solution.isMatch(s6,s7);
 
-    Solution solution;
-    std::string s1 = "sadbutsad";
-    std::string s2 = "sad";
+     int i1 = 10;
+     int i2 = 3;
 
-    std::string s3 = "leetcode";
-    std::string s4 = "leeto";
+     int i3 = 7;
+     int i4 = -3;
 
-    std::string s5 = "mississippi";
-    std::string s6 = "issip";      // 预期结果 4
+     Solution solution;
 
-    std::string s7 = "mississippi";
-    std::string s8 = "issi";      // 预期结果 1
-    std::cout<<solution.strStr(s5,s6);
+     std::cout<<solution.divide(i3,i4);
 }
