@@ -55,8 +55,8 @@ public:
 //
 //        bool isNegative = (dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0);
 //
-//        long dividend_abs = std::abs(dividend);
-//        long divisor_abs = std::abs(divisor);
+//        int dividend_abs = std::abs(dividend);
+//        int divisor_abs = std::abs(divisor);
 //
 //        // 处理特殊情况：除数为-2147483648
 //        if (divisor_abs == INT_MIN) {
@@ -125,6 +125,7 @@ public:
 
           // 一般情况，使用二分查找
           // 将所有的正数取相反数，这样就只需要考虑一种情况
+          // rev 记录最终结果是不是负数
           bool rev = false;
           if (dividend > 0) {
               dividend = -dividend;
