@@ -103,85 +103,105 @@ public:
 //        return result;
 //    }
 
-      // 官方题解1 ： 二分查找
-      int divide(int dividend, int divisor) {
-          // 考虑被除数为最小值的情况
-          if (dividend == INT_MIN) {
-              if (divisor == 1) {
-                  return INT_MIN;
-              }
-              if (divisor == -1) {
-                  return INT_MAX;
-              }
-          }
-          // 考虑除数为最小值的情况
-          if (divisor == INT_MIN) {
-              return dividend == INT_MIN ? 1 : 0;
-          }
-          // 考虑被除数为 0 的情况
-          if (dividend == 0) {
-              return 0;
-          }
+    // 官方题解1 ： 二分查找
+    // 通过穷举的方式查找结果
+    int divide(int dividend, int divisor) {
+        // 考虑被除数为最小值的情况
+        if (dividend == INT_MIN) {
+            if (divisor == 1) {
+                return INT_MIN;
+            }
+            if (divisor == -1) {
+                return INT_MAX;
+            }
+        }
+        // 考虑除数为最小值的情况
+        if (divisor == INT_MIN) {
+            return dividend == INT_MIN ? 1 : 0;
+        }
+        // 考虑被除数为 0 的情况
+        if (dividend == 0) {
+            return 0;
+        }
 
-          // 一般情况，使用二分查找
-          // 将所有的正数取相反数，这样就只需要考虑一种情况
-          // rev 记录最终结果是不是负数
-          bool rev = false;
-          if (dividend > 0) {
-              dividend = -dividend;
-              rev = !rev;
-          }
-          if (divisor > 0) {
-              divisor = -divisor;
-              rev = !rev;
-          }
+        // 一般情况，使用二分查找
+        // 将所有的正数取相反数，这样就只需要考虑一种情况
+        // rev 记录最终结果是不是负数，两者之间有一个负数时，rev == true
+        bool rev = false;
+        if (dividend > 0) {
+            dividend = -dividend;
+            rev = !rev;
+        }
+        if (divisor > 0) {
+            divisor = -divisor;
+            rev = !rev;
+        }
 
-          // 快速乘
-          auto quickAdd = [](int y, int z, int x) {
-              // x 和 y 是负数，z 是正数
-              // 需要判断 z * y >= x 是否成立
-              int result = 0, add = y;
-              while (z) {
-                  if (z & 1) {
-                      // 需要保证 result + add >= x
-                      if (result < x - add) {
-                          return false;
-                      }
-                      result += add;
-                  }
-                  if (z != 1) {
-                      // 需要保证 add + add >= x
-                      if (add < x - add) {
-                          return false;
-                      }
-                      add += add;
-                  }
-                  // 不能使用除法
-                  z >>= 1;
-              }
-              return true;
-          };
+        // 快速乘算法，用于判断表达式 z * y >= x 是否成立
+        // 模拟乘法：
+        //   z * y 可以通过逐位累加的方式来模拟。
+        //   当 z 的某一位为 1 时，表示 y 应该被累加到 result 中。
+        //   当 z 的某一位为 0 时，表示 y 不需要被累加到 result 中。
+        auto quickAdd = [](int y, int z, int x) {
+            // x 和 y 是负数，z 是正数
+            // result表示当前累加的结果, add表示每次累加的值
+            int result = 0, add = y;
 
-          int left = 1, right = INT_MAX, ans = 0;
-          while (left <= right) {
-              // 注意溢出，并且不能使用除法
-              int mid = left + ((right - left) >> 1);
-              bool check = quickAdd(divisor, mid, dividend);
-              if (check) {
-                  ans = mid;
-                  // 注意溢出
-                  if (mid == INT_MAX) {
-                      break;
-                  }
-                  left = mid + 1;
-              }
-              else {
-                  right = mid - 1;
-              }
-          }
+            // 遍历z的每一位
+            while (z) {
+                // 判断 z 的二进制表示中最右边的一位（最低位）是否为 1：
+                // 为什么最低位为1时才需要累加操作?
+                // 乘法的展开：
+                //   假设 z 的二进制表示为 b_n b_{n-1} ... b_1 b_0，那么 z * y 可以被表示为 b_n * (2^n * y) + b_{n-1} * (2^{n-1} * y) + ... + b_1 * (2^1 * y) + b_0 * (2^0 * y)。
+                //   如果 b_i 为 1，则 2^i * y 需要被加入到结果中。
+                //   如果 b_i 为 0，则 2^i * y 不需要被加入到结果中，因为它的值为 0。
+                if (z & 1) {
+                    // 需要保证 result + add >= x
+                    if (result < x - add) {
+                        return false;
+                    }
+                    result += add;
+                }
+                if (z != 1) {
+                    // 需要保证 add + add >= x
+                    if (add < x - add) {
+                        return false;
+                    }
+                    add += add;
+                }
+                // 不能使用除法，这里相当于z/=2,但当z = 1 时，z>>=1 后z == 0
+                z >>= 1;
+            }
+            return true;
+        };
 
-          return rev ? -ans : ans;
-      }
+        // 在(0,Int_Max] 中通过二分法查找结果
+        int left = 1, right = INT_MAX, ans = 0;
+
+        // 当left > right 时，说明已经穷举了所有可能的结果
+        while (left <= right) {
+            // 注意溢出，并且不能使用除法
+            int mid = left + ((right - left) >> 1);
+            // check 判断z*x >= y 是否成立
+            bool check = quickAdd(divisor, mid, dividend);
+            if (check) {
+                // 成立
+                ans = mid;
+                // 注意溢出
+                if (mid == INT_MAX) {
+                    break;
+                }
+
+                // 当前mid 值可能小于结果，需要增大
+                left = mid + 1;
+            } else {
+                // 不成立，因为xy都是负数，所以说明这个mid值大了，需要减小
+                right = mid - 1;
+            }
+        }
+
+        return rev ? -ans : ans;
+    }
 };
 
 #endif //ALGORITHM_TEST_29_H
