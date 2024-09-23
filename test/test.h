@@ -193,12 +193,12 @@ class Test {
     // 大体思路就是一个指针向前读值，另一个指针用于在后面作比较
     int removeDuplicates(std::vector<int> &nums) {
         size_t size = nums.size();
-        if(size == 0)
+        if (size == 0)
             return 0;
         int fast = 1;
         int slow = 1;
-        while(fast < size){
-            if(nums[fast] != nums[fast -1]){
+        while (fast < size) {
+            if (nums[fast] != nums[fast - 1]) {
                 nums[slow] = nums[fast];
                 slow++;
             }
@@ -208,14 +208,14 @@ class Test {
     }
 
     // 27、删除数组中指定的元素 双指针优化法
-    int removeElement(std::vector<int>& nums, int val) {
-       int left = 0;
-       int right = nums.size();
-        while (left < right){
-            if(nums[left] == val){
+    int removeElement(std::vector<int> &nums, int val) {
+        int left = 0;
+        int right = nums.size();
+        while (left < right) {
+            if (nums[left] == val) {
                 nums[left] = nums[right - 1];
                 right--;
-            }else{
+            } else {
                 left++;
             }
         }
@@ -239,41 +239,87 @@ class Test {
 //        return -1;
 //    }
     // 28、使用Kmp算法匹配
-    int strStr(std::string s , std::string p){
+    int strStr(std::string s, std::string p) {
         size_t s_size = s.size();
         size_t p_size = p.size();
 
-        if(p_size > s_size){
+        if (p_size > s_size) {
             return -1;
         }
-        if(s_size == 0){
+        if (s_size == 0) {
             return -1;
         }
-        std::vector<int> next (p_size,0);
+        std::vector<int> next(p_size, 0);
 
         int j = 0;
-        for(int i=1;i<p_size;i++){
-            while (j>0 && p[i] != p[j]){
+        for (int i = 1; i < p_size; i++) {
+            while (j > 0 && p[i] != p[j]) {
                 j = next[j - 1];
             }
-            if(p[i] == p[j]){
+            if (p[i] == p[j]) {
                 j++;
             }
             next[i] = j;
         }
         j = 0;
-        for(int i=0; i<s_size; i++){
-            while(j>0 && s[i] != p[j]){
+        for (int i = 0; i < s_size; i++) {
+            while (j > 0 && s[i] != p[j]) {
                 j = next[j - 1];
             }
-            if(s[i] == p[j]){
+            if (s[i] == p[j]) {
                 j++;
             }
-            if(j == p_size){
+            if (j == p_size) {
                 return i - p_size + 1;
             }
         }
         return -1;
+    }
+
+    // 29、二分法实现除法
+    int divide(int dividend, int divisor) {
+        //排除特殊情况
+        if (dividend == INT_MIN) {
+            if (divisor == -1) {
+                return INT_MAX;
+            } else if (divisor == 1) {
+                return INT_MIN;
+            }
+        }
+        if (divisor == INT_MIN) {
+            return dividend == INT_MIN ? 1 : 0;
+        }
+
+        if (divisor == 0) {
+            return 0;
+        }
+
+        // 记录结果符号
+        bool isNegative = false;
+        if (dividend > 0) {
+            dividend = -dividend;
+            isNegative = !isNegative;
+        }
+
+        if (divisor > 0) {
+            divisor = -divisor;
+            isNegative = !isNegative;
+        }
+
+        // 快速乘算法
+        // a : 被除数  < 0
+        // b : 除数    < 0
+        // c : 中间值   > 0
+        // 用于判断 b*c < a 是不是成立
+        auto quickAdd = [](int a, int b, int c) {
+            while (c) {
+                int add = c;
+                if (c & 1) {
+
+                }
+            }
+            return false;
+        };
     }
 };
 

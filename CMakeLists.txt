@@ -53,6 +53,7 @@ set(HARD_SOURCES
         hard/23.h
 
         hard/25.h
+        hard/30.h
 )
 
 add_executable(algorithm_test
