@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "29.h"
+#include "33.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -17,13 +17,7 @@ int main() {
 //    Solution solution;
 //    std::cout<< solution.isMatch(s6,s7);
 
-     int i1 = 10;
-     int i2 = 3;
-
-     int i3 = 7;
-     int i4 = -3;
-
-     Solution solution;
-
-     std::cout<<solution.divide(i3,i4);
+      std::vector<int> nums1{4,5,6,7,0,1,2};
+      Solution solution;
+      std::cout<<solution.search(nums1,0);
 }

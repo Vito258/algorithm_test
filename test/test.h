@@ -6,6 +6,7 @@
 #define ALGORITHM_TEST_TEST_H
 
 //#include "../hard/23.h"
+#include <algorithm>
 #include "../hard/25.h"
 #include "../easy/26.h"
 
@@ -310,16 +311,52 @@ class Test {
         // a : 被除数  < 0
         // b : 除数    < 0
         // c : 中间值   > 0
-        // 用于判断 b*c < a 是不是成立
+        // 用于判断 b*c >= a 是不是成立
         auto quickAdd = [](int a, int b, int c) {
+            int result = 0, add = b;
             while (c) {
-                int add = c;
                 if (c & 1) {
-
+                    if (result < a - add) return false;
+                    result += add;
                 }
+                if (c != 1) {
+                    if (add < a - add) return false;
+                    add += add;
+                }
+                c >>= 1;
             }
-            return false;
+            return true;
         };
+
+        int left = 0, right = INT_MAX, ans = 0;
+        while (left <= right) {
+            int middle = (left + right) >> 1;
+            bool check = quickAdd(dividend, divisor, middle);
+            if (check) {
+                ans = middle;
+                if (middle == INT_MAX) break;   // 防止溢出
+                left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+        return isNegative ? -ans : ans;
+    }
+
+    // 31、两遍遍历法寻找下一个序列
+    void nextPermutation(std::vector<int> &nums) {
+         int i = nums.size()-2;
+         while(i>=0 && nums[i-1] >= nums[i]){
+             i--;
+         }
+         if(i>=0){
+             int j = nums.size()-1;
+             while(j >= 0 && nums[j] <= nums[i]){
+                 j--;
+             }
+             std::swap(nums[i],nums[j]);
+         }
+         std::sort(nums.begin()+i+1,nums.end());
     }
 };
 

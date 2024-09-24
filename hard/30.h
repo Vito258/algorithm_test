@@ -24,7 +24,6 @@ public:
             return {};
         }
         int word_size = words[0].size();
-
     }
 };
 
