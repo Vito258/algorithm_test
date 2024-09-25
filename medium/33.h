@@ -16,60 +16,104 @@
 // nums 中的每个值都 独一无二
 // 题目数据保证 nums 在预先未知的某个下标上进行了旋转
 // -104 <= target <= 104
+
 class Solution {
 public:
     // 尝试自己使用二分法
+//    int search(std::vector<int> &nums, int target) {
+//        // 旋转序列可以看为两个升序序列对接，且第二个序列的最大值小于第一个序列的最小值
+//        // left 为第一个序列的最小值，right 为第二个序列的最大值
+//        int left = 0, right = nums.size() - 1;
+//        int middle = (left + right)/2;
+//
+//        // 判断target 是在第一个还是第二个序列中
+//        if (target > nums[right]) {
+//            // 在第一序列
+//            while(nums[middle] < nums [right]){
+//                right--;
+//                middle = (left + right)/2;
+//            }
+//
+//        } else if (target < nums[right]) {
+//            // 在第二序列
+//        } else {
+//            // 处理特殊情况
+//            return right;
+//        }
+//        while (left <= right) {
+//            middle = (left + right) / 2;
+//            if (nums[middle] == target) return middle;
+//
+//            // middle 属于第二个序列
+//            if (nums[middle] < nums[left]) {
+//                if (nums[middle] < target) {
+//                    if (nums[right] < target) {
+//                        right = middle - 1;
+//                    } else if (nums[right] > target) {
+//                        left = middle + 1;
+//                    } else {
+//                        return right;
+//                    }
+//                }
+//
+//                if (nums[middle] > target) {
+//                    right = middle - 1;
+//                }
+//            }
+//
+//            // middle 属于第一个序列
+//            if (nums[middle] > nums[left]) {
+//                if (nums[middle] > target) {
+//                    right = middle - 1;
+//                }
+//                if (nums[middle] < target) {
+//                    left = middle + 1;
+//                    right = middle - 1;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+
     int search(std::vector<int> &nums, int target) {
-        // 旋转序列可以看为两个升序序列对接，且第二个序列的最大值小于第一个序列的最小值
-        // left 为第一个序列的最小值，right 为第二个序列的最大值
-        int left = 0, right = nums.size() - 1;
-        int middle = (left + right)/2;
-
-        // 判断target 是在第一个还是第二个序列中
-        if (target > nums[right]) {
-            // 在第一序列
-            while(nums[middle] < nums [right]){
-                right--;
-                middle = (left + right)/2;
-            }
-
-        } else if (target < nums[right]) {
-            // 在第二序列
-        } else {
-            // 处理特殊情况
-            return right;
+        //如何找到旋转处索引
+        int size = nums.size();
+        int rev_index = 0;
+        for (int i = 1; i < size; ++i) {
+             if(nums[i]< nums[i-1]){
+                 rev_index = i;
+                 break;
+             }
         }
-        while (left <= right) {
-            middle = (left + right) / 2;
-            if (nums[middle] == target) return middle;
 
-            // middle 属于第二个序列
-            if (nums[middle] < nums[left]) {
-                if (nums[middle] < target) {
-                    if (nums[right] < target) {
-                        right = middle - 1;
-                    } else if (nums[right] > target) {
-                        left = middle + 1;
-                    } else {
-                        return right;
-                    }
-                }
+        // 处理特殊情况
+        if(target == nums[0]){
+            return 0;
+        }
 
-                if (nums[middle] > target) {
-                    right = middle - 1;
-                }
-            }
+        if(target == nums[size - 1]){
+            return size -1;
+        }
+        if(target == nums[rev_index]){
+            return rev_index;
+        }
 
-            // middle 属于第一个序列
-            if (nums[middle] > nums[left]) {
-                if (nums[middle] > target) {
-                    right = middle - 1;
-                }
-                if (nums[middle] < target) {
-                    left = middle + 1;
-                    right = middle - 1;
-                }
-            }
+        int left,right;
+        //
+        if(target < nums[size - 1]){
+            left = rev_index;
+            right = size -1;
+        }
+        if(target > nums[size - 1]){
+            left = 0;
+            right = rev_index -1;
+        }
+        int middle;
+        while(left <= right){
+           middle = (left+right)/2;
+            if(nums[middle] == target) return middle;
+            if(nums[middle] > target) right--;
+            if(nums[middle] < target) left++;
         }
         return -1;
     }
