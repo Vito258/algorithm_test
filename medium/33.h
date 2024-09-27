@@ -74,7 +74,7 @@ public:
 //        }
 //        return -1;
 //    }
-
+    // 通过！！
     int search(std::vector<int> &nums, int target) {
         //如何找到旋转处索引
         int size = nums.size();
@@ -117,6 +117,42 @@ public:
         }
         return -1;
     }
+
+    // 官方题解1：
+//    int search(std::vector<int> &nums, int target) {
+//        int n = (int)nums.size();
+//        if (!n) {
+//            return -1;
+//        }
+//        if (n == 1) {
+//            return nums[0] == target ? 0 : -1;
+//        }
+//        int l = 0, r = n - 1;
+//        while (l <= r) {
+//            int mid = (l + r) / 2;
+//            if (nums[mid] == target) return mid;
+//            if (nums[0] <= nums[mid]) {
+                  // mid 在第二序列中
+//                if (nums[0] <= target && target < nums[mid]) {
+                      // target 在第二序列中
+//                    r = mid - 1;
+//                } else {
+                      // target 在第一序列中
+//                    l = mid + 1;
+//                }
+//            } else {
+                  // mid 在第一序列中
+//                if (nums[mid] < target && target <= nums[n - 1]) {
+                      // target 在第一序列中
+//                    l = mid + 1;
+//                } else {
+                      // target 在第二序列中
+//                    r = mid - 1;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
 };
 
 #endif //ALGORITHM_TEST_33_H

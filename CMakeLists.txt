@@ -24,6 +24,7 @@ set(EASY_SOURCES
         easy/26.h
         easy/27.h
         easy/28.h
+        easy/35.h
 )
 
 # 一般难度的题目
@@ -46,6 +47,8 @@ set(MEDIUM_SOURCES
         medium/29.h
         medium/31.h
         medium/33.h
+        medium/34.h
+        medium/36.h
 )
 
 # 困难难度的题目
