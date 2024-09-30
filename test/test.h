@@ -358,6 +358,31 @@ class Test {
          }
          std::sort(nums.begin()+i+1,nums.end());
     }
+
+    // 39、搜索回溯找组合和
+    void dfs(std::vector<int> &candinate,int target, int index,std::vector<int> combine,std::vector<std::vector<int>> &ans)
+    {
+        if(index = candinate.size()){
+            return;
+        }
+        if(target = 0){
+            ans.emplace_back(combine);
+            return;
+        }
+        dfs(candinate,target,index+1,combine,ans);
+
+        if(target - candinate[index]){
+            combine.emplace_back(target);
+            dfs(candinate,target-candinate[index],index,combine,ans);
+            combine.pop_back();
+        }
+    }
+    std::vector<std::vector<int>> combinationSum(std::vector<int>& candidates, int target) {
+        std::vector<std::vector<int>> ans;
+        std::vector<int> combine;
+        dfs(candidates,target,0,combine,ans);
+        return ans;
+    }
 };
 
 #endif //ALGORITHM_TEST_TEST_H

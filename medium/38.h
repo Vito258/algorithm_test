@@ -15,13 +15,13 @@
 // 使用迭代的方式
 class Solution {
 public:
-    std::string countAndSay(int n) {
-        if(n != 1){
-            return getRleString(countAndSay(n-1));
-        }else{
-            return "1";
-        }
-    }
+//    std::string countAndSay(int n) {
+//        if(n != 1){
+//            return getRleString(countAndSay(n-1));
+//        }else{
+//            return "1";
+//        }
+//    }
 
     // 根据字符串返回行程长度编码的方法
     std::string getRleString(std::string string) {
@@ -70,25 +70,30 @@ public:
     }
 
     // 官方题解1，由于官方题解2竟然是打表...  就不看了哈哈
-//    string countAndSay(int n) {
-//        string prev = "1";
-//        for (int i = 2; i <= n; ++i) {
-//            string curr = "";
-//            int start = 0;
-//            int pos = 0;
-//
-//            while (pos < prev.size()) {
-//                while (pos < prev.size() && prev[pos] == prev[start]) {
-//                    pos++;
-//                }
-//                curr += to_string(pos - start) + prev[start];
-//                start = pos;
-//            }
-//            prev = curr;
-//        }
-//
-//        return prev;
-//    }
+    std::string countAndSay(int n) {
+        std::string prev = "1";
+           // 进行n-1 次求值
+        for (int i = 2; i <= n; ++i) {
+            std::string curr = "";
+            int start = 0;
+            int pos = 0;
+
+            // rle 算法的核心
+            while (pos < prev.size()) {
+                // 这里又加了一遍pos < prev.size()是为了给prev[pos]加一个前提条件，防止出现越界
+                while (pos < prev.size() && prev[pos] == prev[start]) {
+                    pos++;
+                }
+                // pos - start 就是有几个相同的数字，prev[start]就是数字的值
+                curr += std::to_string(pos - start) + prev[start];
+                start = pos;
+            }
+            // 得出当前的rle 算法的值
+            prev = curr;
+        }
+
+        return prev;
+    }
 };
 
 #endif //ALGORITHM_TEST_38_H
