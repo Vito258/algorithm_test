@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "38.h"
+#include "40.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -23,5 +23,12 @@ int main() {
 //      std::cout<< solution.isValidSudoku(board2);
 
         Solution solution;
-        std::cout<<solution.countAndSay(4);
+        std::vector<int> v1 = {2,5,2,1,2};
+        std::vector<std::vector<int>> result =  solution.combinationSum2(v1,5);
+        for(int i =0;i<result.size();i++){
+            for(int j=0;j<result[i].size();j++){
+                std::cout<<result[i][j]<<std::endl;
+            }
+            std::cout<<"-------------------------"<<std::endl;
+        }
 }
