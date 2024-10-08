@@ -345,43 +345,81 @@ class Test {
 
     // 31、两遍遍历法寻找下一个序列
     void nextPermutation(std::vector<int> &nums) {
-         int i = nums.size()-2;
-         while(i>=0 && nums[i-1] >= nums[i]){
-             i--;
-         }
-         if(i>=0){
-             int j = nums.size()-1;
-             while(j >= 0 && nums[j] <= nums[i]){
-                 j--;
-             }
-             std::swap(nums[i],nums[j]);
-         }
-         std::sort(nums.begin()+i+1,nums.end());
+        int i = nums.size() - 2;
+        while (i >= 0 && nums[i - 1] >= nums[i]) {
+            i--;
+        }
+        if (i >= 0) {
+            int j = nums.size() - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            std::swap(nums[i], nums[j]);
+        }
+        std::sort(nums.begin() + i + 1, nums.end());
     }
 
     // 39、搜索回溯找组合和
-    void dfs(std::vector<int> &candinate,int target, int index,std::vector<int> combine,std::vector<std::vector<int>> &ans)
-    {
-        if(index = candinate.size()){
+    void dfs(std::vector<int> &candinate, int target, int index, std::vector<int> combine,
+             std::vector<std::vector<int>> &ans) {
+        if (index = candinate.size()) {
             return;
         }
-        if(target = 0){
+        if (target = 0) {
             ans.emplace_back(combine);
             return;
         }
-        dfs(candinate,target,index+1,combine,ans);
+        dfs(candinate, target, index + 1, combine, ans);
 
-        if(target - candinate[index]){
+        if (target - candinate[index]) {
             combine.emplace_back(target);
-            dfs(candinate,target-candinate[index],index,combine,ans);
+            dfs(candinate, target - candinate[index], index, combine, ans);
             combine.pop_back();
         }
     }
-    std::vector<std::vector<int>> combinationSum(std::vector<int>& candidates, int target) {
+
+    std::vector<std::vector<int>> combinationSum(std::vector<int> &candidates, int target) {
         std::vector<std::vector<int>> ans;
         std::vector<int> combine;
-        dfs(candidates,target,0,combine,ans);
+        dfs(candidates, target, 0, combine, ans);
         return ans;
+    }
+
+    // 43、字符串相乘
+    std::string multiply(std::string num1, std::string num2) {
+        if (num1 == "0" || num2 == "0")
+            return "0";
+        int n1 = num1.size();
+        int n2 = num2.size();
+
+        // 初始化结果数组
+        std::vector<int> result;
+        result.resize(n1 + n2, 0);
+
+        for (int i = n1 - 1; i >= 0; ++i) {
+            int n1_last = num1[i] - '0';
+            int carry = 0;
+            for (int j = n2 - 1; j >= 0; ++j) {
+                int n2_last = num2[j] - '0';
+                int sum = n1_last * n2_last + result[i + j + 1] + carry;
+                result[i + j + 1] = sum % 10;
+                carry = sum / 10;
+            }
+            result[i] += carry;
+        }
+
+        std::string result_string;
+        bool leading_zero = true;
+        for(int digt : result){
+            if(leading_zero && digt == 0)
+                continue;
+            leading_zero = false;
+            result_string.push_back(digt + '0');
+        }
+        if(result_string.empty()){
+            return "0";
+        }
+        return result_string;
     }
 };
 
