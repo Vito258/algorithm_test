@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "45.h"
+#include "46.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -26,5 +26,12 @@ int main() {
     std::vector<int> v1 = {2, 3, 1, 1, 4};
     std::vector<int> v2 = {2, 3, 0, 1, 4};
     std::vector<int> v3 = {1,2,1,1,1};
-    std::cout << solution.jump(v1);
+    std::vector<int> v4 = {1,2,3};
+    std::vector<std::vector<int>> result = solution.permute(v4);
+    for(auto nums : result){
+        for(int i : nums){
+            std::cout<<i<<std::endl;
+        }
+        std::cout<<"------------------------"<<std::endl;
+    }
 }

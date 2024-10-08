@@ -59,6 +59,8 @@ public:
 //    }
 
     // 优化之后的代码，使用贪心算法：
+    // 当前算法的复杂度为n，需要遍历vector 中的每个元素，观察其能到达的最末尾的节点
+    // 当 i 是落脚点之一时，step++, index == n-1 时不计入，index == 0 时,step++ 一定执行
     int jump(std::vector<int>& nums) {
         int n = nums.size();
         if (n <= 1) return 0;
