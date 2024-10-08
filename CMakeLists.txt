@@ -53,6 +53,7 @@ set(MEDIUM_SOURCES
         medium/39.h
         medium/40.h
         medium/43.h
+        medium/45.h
 )
 
 # 困难难度的题目

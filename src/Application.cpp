@@ -1,7 +1,7 @@
 //
 // Created by 860122023 on 2024/8/7.
 //
-#include "43.h"
+#include "45.h"
 #include "../utils/utils.h"
 
 int main() {
@@ -22,6 +22,9 @@ int main() {
 //      std::vector<std::vector<char>> board2 = {{'.','.','.','.','5','.','.','1','.'},{'.','4','.','3','.','.','.','.','.'},{'.','.','.','.','.','3','.','.','1'},{'8','.','.','.','.','.','.','2','.'},{'.','.','2','.','7','.','.','.','.'},{'.','1','5','.','.','.','.','.','.'},{'.','.','.','.','.','2','.','.','.'},{'.','2','.','9','.','.','.','.','.'},{'.','.','4','.','.','.','.','.','.'}};
 //      std::cout<< solution.isValidSudoku(board2);
 
-        Solution solution;
-        std::cout<<solution.multiply("123","456");
+    Solution solution;
+    std::vector<int> v1 = {2, 3, 1, 1, 4};
+    std::vector<int> v2 = {2, 3, 0, 1, 4};
+    std::vector<int> v3 = {1,2,1,1,1};
+    std::cout << solution.jump(v1);
 }

@@ -410,16 +410,36 @@ class Test {
 
         std::string result_string;
         bool leading_zero = true;
-        for(int digt : result){
-            if(leading_zero && digt == 0)
+        for (int digt: result) {
+            if (leading_zero && digt == 0)
                 continue;
             leading_zero = false;
             result_string.push_back(digt + '0');
         }
-        if(result_string.empty()){
+        if (result_string.empty()) {
             return "0";
         }
         return result_string;
+    }
+
+    //
+    int jump(std::vector<int> &nums) {
+        int n = nums.size();
+        if (n <= 1) {
+            return 1;
+        }
+        int maxReach = 0;
+        int end = 0;
+        int step = 0;
+        for (int i = 0; i < n - 1; ++i) {
+            maxReach = std::max(maxReach, i + nums[i]);
+            if (i == end) {
+                step++;
+                end = maxReach;
+            }
+            if(end >= n-1) break;
+        }
+        return step;
     }
 };
 
